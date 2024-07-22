@@ -1,0 +1,14 @@
+-- Health Data-
+-- OHC
+-- IPD
+-- OPD
+-- OHC- Medicine
+-- IPD-
+-- OPD-
+
+-- Health Data -
+-- 	- OHC
+-- 	- OPD
+-- 	- IPD
+-- 	- Medicine
+-- 	- pathlogy
