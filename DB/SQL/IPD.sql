@@ -10,3 +10,7 @@ create table IPD(
 	status int,
 	FOREIGN KEY (userId) REFERENCES HRStatic(userId)
 );
+
+-- example data
+insert into ipd (userid, admit_no, admission_date, discharge_date, doctor, prescription, status)
+values (1234, 324, '2024-07-09', '2024-07-19', 'B.C.Roy', 'fever 104degF', 0);

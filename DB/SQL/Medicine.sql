@@ -7,3 +7,7 @@ create table Medicine(
 	medicine text,
 	FOREIGN KEY (userId) REFERENCES HRStatic(userId)
 );
+
+-- example data
+insert into medicine (userid, date, doctor, medicine)
+values (1234, '2024-07-20', 'B.C.Roy', 'Pand-40');

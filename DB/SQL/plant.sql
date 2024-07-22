@@ -19,12 +19,18 @@ create table plantStatic(
 	location text
 );
 
+-- example data
+insert into plantStatic (plantid, name, location) values (2356, 'shop 1', 'kolkata');
+
 create table plantEnviroment (
 	id serial primary key,
 	plantId int not null,
 	date date not null,
 	temparature float,
-	c02_label float,
+	co2_label float,
 	humidity float,
 	FOREIGN KEY (plantId) REFERENCES plantStatic(plantId)
 );
+
+-- example data
+insert into plantEnviroment (plantId, date, temparature, co2_label, humidity) values (2356, '2021-04-23', 30.5, 0.5, 0.6);

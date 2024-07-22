@@ -7,3 +7,7 @@ create table OHC(
 	prescription text,
 	FOREIGN KEY (userId) REFERENCES HRStatic(userId)
 );
+
+-- example data
+insert into ohc (userid, date, doctor, prescription)
+values (1234, '2024-07-01', 'B.C.Roy', 'fever 100 degF');

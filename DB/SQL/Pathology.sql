@@ -7,3 +7,7 @@ create table Pathology(
 	result text,
 	FOREIGN KEY (userId) REFERENCES HRStatic(userId)
 );
+
+-- example data
+insert into pathology (userid, date, test, result)
+values (1234, '2024-07-21', 'Blood test', 'okey');
