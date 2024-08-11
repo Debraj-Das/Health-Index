@@ -34,8 +34,8 @@ app.listen(port, () => {
    7. api/pathology 
 */
 
-import plant from "./Routes/plant.js";
-app.use("/api/plant", plant);
+import shop from "./Routes/Shop.js";
+app.use("/api/plant", shop);
 
 import hr from "./Routes/HR.js";
 app.use("/api/HR", hr);

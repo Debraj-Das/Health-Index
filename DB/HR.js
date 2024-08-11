@@ -1,47 +1,65 @@
 import db from "./HealthIndexDB.js";
 
 async function allUser() {
-  const result = await db.query("select * from hrstatic;");
+  const result = await db.query("select * from hr_static;");
   return result.rows;
 }
 
 async function userInf(id) {
-  const result = await db.query("select * from hrstatic where userid=$1;", [
+  const result = await db.query("select * from hr_static where userid=$1;", [
     id,
   ]);
   return result.rows[0];
 }
 
 async function addUser(user) {
-  const { userid, name, dob, gender, phone, email } = user;
+  const {
+    userid,
+    name,
+    dob,
+    gender,
+    phone,
+    email,
+    joining_date,
+    leaving_date,
+  } = user;
   const result = await db.query(
-    "insert into hrstatic (userid, name, dob, gender, phone, email) values ($1, $2, $3, $4, $5, $6) returning *;",
-    [userid, name, dob, gender, phone, email]
+    "insert into hr_static (userid, name, dob, gender, phone, email, joining_date, leaving_date) values ($1, $2, $3, $4, $5, $6, $7,$8) returning *;",
+    [userid, name, dob, gender, phone, email, joining_date, leaving_date]
   );
   return result.rows[0];
 }
 
 async function updateUser(user) {
-  const { userid, name, dob, gender, phone, email } = user;
+  const {
+    userid,
+    name,
+    dob,
+    gender,
+    phone,
+    email,
+    joining_date,
+    leaving_date,
+  } = user;
   const result = await db.query(
-    "update hrstatic set name = $2, dob = $3 , gender = $4, phone = $5, email = $6 where userid = $1 returning *;",
-    [userid, name, dob, gender, phone, email]
+    "update hr_static set name = $2, dob = $3 , gender = $4, phone = $5, email = $6, joining_date = $7, leaving_date= $8 where userid = $1 returning *;",
+    [userid, name, dob, gender, phone, email, joining_date, leaving_date]
   );
   return result.rows[0];
 }
 
-async function userWorking(id) {
-  const result = await db.query("SELECT * FROM hrdynamic where userid = $1;", [
-    id,
+async function userWorking(userid) {
+  const result = await db.query("SELECT * FROM hr_dynamic where userid = $1;", [
+    userid,
   ]);
   return result.rows;
 }
 
 async function addUserWorking(user) {
-  const { userid, plantid, startdate, enddate, shift } = user;
+  const { userid, shopid, shift, grade, joining_shop } = user;
   const result = await db.query(
-    "insert into hrdynamic (userid, plantid, starting_date, ending_date, shift) values ($1, $2, $3, $4, $5) returning *;",
-    [userid, plantid, startdate, enddate, shift]
+    "insert into hr_dynamic (userid, shopid, shift, grade, joining_shop) values ($1, $2, $3, $4, $5, $6, $7) returning *;",
+    [userid, shopid, shift, grade, joining_shop]
   );
   return result.rows[0];
 }

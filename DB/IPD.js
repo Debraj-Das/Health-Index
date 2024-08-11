@@ -21,7 +21,7 @@ async function addIPD(ipd) {
     status,
   } = ipd;
   const result = await db.query(
-    "insert into ipd (userid, admit_no, admission_date, discharge_date, doctor, prescription, status) values ($1, $2, $3, $4, $5, $6, $7) returning *;",
+    "insert into ipd (userid, admit_no, admit_date, discharge_date, doctor, prescription, status) values ($1, $2, $3, $4, $5, $6, $7) returning *;",
     [
       userid,
       admit_no,
@@ -46,7 +46,7 @@ async function updateIPD(ipd) {
     status,
   } = ipd;
   const result = await db.query(
-    "update ipd set admit_no = $2, admission_date = $3, discharge_date = $4, doctor = $5, prescription = $6, status = $7 where userid = $1 returning *;",
+    "update ipd set admit_no = $2, admit_date = $3, discharge_date = $4, doctor = $5, prescription = $6, status = $7 where userid = $1 returning *;",
     [
       userid,
       admit_no,

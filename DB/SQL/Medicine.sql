@@ -1,13 +1,9 @@
--- Medicine
-create table Medicine(
-	id serial primary key,
-	userId int not null,
-	date date not null,
-	doctor text,
-	medicine text,
-	FOREIGN KEY (userId) REFERENCES HRStatic(userId)
+create table medicine(
+   id serial primary key,
+   userid int not null,
+   date date,
+   doctor text,
+   medicine text
 );
 
--- example data
-insert into medicine (userid, date, doctor, medicine)
-values (1234, '2024-07-20', 'B.C.Roy', 'Pand-40');
+insert into medicine(userid, date, doctor, medicine) values(1234, '2019-01-01', 'Dr. A', 'Medicine A'), (1234, '2019-01-02', 'Dr. B', 'Medicine B');

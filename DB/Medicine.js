@@ -13,7 +13,7 @@ async function queryMedicine(id) {
 }
 
 async function addMedicine(medicines) {
-  const { useid, date, doctor, medicine } = medicines;
+  const { userid, date, doctor, medicine } = medicines;
 
   const result = await db.query(
     "insert into medicine (userid, date, doctor, medicine) values ($1, $2, $3, $4) returning *;",

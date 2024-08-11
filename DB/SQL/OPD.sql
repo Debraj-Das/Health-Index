@@ -1,14 +1,10 @@
--- OPD
-create table OPD(
-	id serial primary key,
-	userId int not null,
-	date date not null,
-	doctor text,
-	prescription text,
-	status int,
-	FOREIGN KEY (userId) REFERENCES HRStatic(userId)
+create table opd (
+   id serial primary key,
+   userid integer not null,
+   date date,
+   doctor text,
+   status int
 );
 
--- example data
-insert into opd (userid, date, doctor, prescription, status)
-values (1234 , '2024-07-06', 'B.C.Roy', 'fever 100degF', 0);
+insert into opd (userid, date, doctor, status) values (1234, '2017-01-01', 'Dr. Abc', 0),
+(1234, '2024-05-07', 'Dr. Abs', 1);

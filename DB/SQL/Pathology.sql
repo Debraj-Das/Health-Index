@@ -1,13 +1,9 @@
--- Pathology
-create table Pathology(
-	id serial primary key,
-	userId int not null,
-	date date not null,
-	test text,
-	result text,
-	FOREIGN KEY (userId) REFERENCES HRStatic(userId)
+create table pathology (
+   id serial primary key,
+   userid integer not null,
+   date date,
+   test text,
+   result text
 );
 
--- example data
-insert into pathology (userid, date, test, result)
-values (1234, '2024-07-21', 'Blood test', 'okey');
+insert into pathology (userid, date, test, result) values (1234, '2016-01-01', 'CBC', 'Normal'), (1234, '2016-01-01', 'CBC', 'Normal'), (1234, '2016-01-01', 'CBC', 'Normal');
