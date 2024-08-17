@@ -53,7 +53,6 @@ shop.post("/:shopid", async (req, res) => {
 });
 
 shop.delete("/:shopid", async (req, res) => {
-  // delete shop information with environment
   const shopid = req.params.shopid;
   const deletedshop = await deleteShop(shopid);
   res.send(deletedshop);

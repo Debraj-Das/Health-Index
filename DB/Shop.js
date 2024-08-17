@@ -2,6 +2,7 @@ import db from "./HealthIndexDB.js";
 
 async function allShop() {
   const result = await db.query("select * from shop;");
+  console.log(result.rows)
   return result.rows;
 }
 
@@ -13,11 +14,23 @@ async function ShopInf(shopid) {
 }
 
 async function addShop(shop) {
+
+  console.log(shop)
   const { shopid, location } = shop;
-  const result = await db.query(
+  let result
+  try {
+  result = await db.query(
     "insert into shop (shopid, location) values ($1, $2) returning *;",
     [shopid, location]
   );
+} catch (err){
+  console.log(err)
+  result = {
+    rows: [{
+      "message": "shopid already exist"
+    }]
+  }
+}
   return result.rows[0];
 }
 
@@ -44,7 +57,7 @@ async function deleteShop(shopid) {
 }
 
 async function ShopEnviroment(shopid) {
-  const result = await db.query("SELECT * FROM shop_env where plantid = $1;", [
+  const result = await db.query("SELECT * FROM shop_env where shopid = $1;", [
     shopid,
   ]);
   return result.rows;

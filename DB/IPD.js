@@ -7,11 +7,11 @@ async function allIPD() {
 
 async function queryIPD(id) {
   const result = await db.query("select * from ipd where userid=$1;", [id]);
-  return result.rows[0];
+  return result.rows;
 }
 
 async function addIPD(ipd) {
-  const {
+  let {
     userid,
     admit_no,
     admission_date,
@@ -20,6 +20,16 @@ async function addIPD(ipd) {
     prescription,
     status,
   } = ipd;
+
+  if(admission_date == ""){
+    admission_date = null;
+  }
+
+  if(discharge_date == ""){
+    discharge_date = null;
+  }
+  
+
   const result = await db.query(
     "insert into ipd (userid, admit_no, admit_date, discharge_date, doctor, prescription, status) values ($1, $2, $3, $4, $5, $6, $7) returning *;",
     [
@@ -34,6 +44,8 @@ async function addIPD(ipd) {
   );
   return result.rows[0];
 }
+
+// updata and delete work remaining
 
 async function updateIPD(ipd) {
   const {

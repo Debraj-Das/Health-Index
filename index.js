@@ -1,5 +1,6 @@
 import dotenv from "dotenv";
 import express from "express";
+import cors from 'cors'
 dotenv.config();
 
 const app = express();
@@ -7,6 +8,8 @@ const port = process.env.PORT || 3000;
 
 app.use(express.json());
 app.use(express.static("public"));
+
+app.use(cors());
 
 app.get("/", (req, res) => {
   res.send("server is working");
@@ -35,7 +38,7 @@ app.listen(port, () => {
 */
 
 import shop from "./Routes/Shop.js";
-app.use("/api/plant", shop);
+app.use("/api/shop", shop);
 
 import hr from "./Routes/HR.js";
 app.use("/api/HR", hr);

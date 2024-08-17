@@ -13,7 +13,7 @@ async function userInf(id) {
 }
 
 async function addUser(user) {
-  const {
+  let {
     userid,
     name,
     dob,
@@ -23,6 +23,16 @@ async function addUser(user) {
     joining_date,
     leaving_date,
   } = user;
+  if(dob == ""){
+    dob = null
+  }
+  if(joining_date == ""){
+    joining_date = null
+  }
+  if(leaving_date == ""){
+    leaving_date = null
+  }
+
   const result = await db.query(
     "insert into hr_static (userid, name, dob, gender, phone, email, joining_date, leaving_date) values ($1, $2, $3, $4, $5, $6, $7,$8) returning *;",
     [userid, name, dob, gender, phone, email, joining_date, leaving_date]
