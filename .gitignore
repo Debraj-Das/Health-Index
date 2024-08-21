@@ -1,3 +1,5 @@
 Private/
 node_modules/
 .env
+
+public/

@@ -3,7 +3,8 @@ create table ohc(
    userid text not null,
    date date,
    doctor text,
-   prescription text
+   prescription text,
+	prescription_path text
 );
 
 

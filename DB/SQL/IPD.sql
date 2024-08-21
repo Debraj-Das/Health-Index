@@ -6,6 +6,7 @@ create table ipd (
    discharge_date date,
    doctor text,
    prescription text,
+   prescription_path text,
    status text
 );
 

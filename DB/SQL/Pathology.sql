@@ -3,7 +3,8 @@ create table pathology (
    userid text not null,
    date date,
    test text,
-   result text
+   result text,
+   result_path text
 );
 
 insert into pathology (userid, date, test, result) values 
