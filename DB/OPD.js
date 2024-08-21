@@ -11,11 +11,11 @@ async function queryOPD(id) {
 }
 
 async function addOPD(opd) {
-  const { userid, date, doctor, prescription, status } = opd;
+  const { userid, date, doctor, prescription, prescription_path, status } = opd;
 
   const result = await db.query(
-    "insert into opd (userid, date, doctor, prescription, status) values ($1, $2, $3, $4, $5) returning *;",
-    [userid, date, doctor, prescription, status]
+    "insert into opd (userid, date, doctor, prescription,prescription_path, status) values ($1, $2, $3, $4, $5, $6) returning *;",
+    [userid, date, doctor, prescription, prescription_path, status]
   );
 
   return result.rows[0];

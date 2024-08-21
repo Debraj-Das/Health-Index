@@ -13,11 +13,11 @@ async function queryPathology(id) {
 }
 
 async function addPathology(pathology) {
-  const { userid, date, test, result } = pathology;
+  const { userid, date, test, result, result_path } = pathology;
 
   const results = await db.query(
-    "insert into pathology (userid, date, test, result) values ($1, $2, $3, $4) returning *;",
-    [userid, date, test, result]
+    "insert into pathology (userid, date, test, result, result_path) values ($1, $2, $3, $4, $5) returning *;",
+    [userid, date, test, result, result_path]
   );
 
   return results.rows[0];

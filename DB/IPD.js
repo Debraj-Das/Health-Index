@@ -18,20 +18,20 @@ async function addIPD(ipd) {
     discharge_date,
     doctor,
     prescription,
+    prescription_path,
     status,
   } = ipd;
 
-  if(admission_date == ""){
+  if (admission_date == "") {
     admission_date = null;
   }
 
-  if(discharge_date == ""){
+  if (discharge_date == "") {
     discharge_date = null;
   }
-  
 
   const result = await db.query(
-    "insert into ipd (userid, admit_no, admit_date, discharge_date, doctor, prescription, status) values ($1, $2, $3, $4, $5, $6, $7) returning *;",
+    "insert into ipd (userid, admit_no, admit_date, discharge_date, doctor, prescription, prescription_path, status) values ($1, $2, $3, $4, $5, $6, $7, $8) returning *;",
     [
       userid,
       admit_no,
@@ -39,6 +39,7 @@ async function addIPD(ipd) {
       discharge_date,
       doctor,
       prescription,
+      prescription_path,
       status,
     ]
   );

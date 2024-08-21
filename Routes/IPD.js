@@ -1,22 +1,38 @@
+import dotenv from "dotenv";
 import express from "express";
+import multer from "multer";
+import path from "node:path";
 import { addIPD, allIPD, deleteIPD, queryIPD, updateIPD } from "../DB/IPD.js";
+
+dotenv.config();
+
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, `${process.env.HOSPITALFILES}`);
+  },
+  filename: (req, file, cb) => {
+    const uniqueSuffix = Date.now() + "-" + Math.round(Math.random() * 1e9);
+    const onlyName = file.originalname.split(".")[0];
+    cb(null, `${onlyName}-${uniqueSuffix}${path.extname(file.originalname)}`);
+  },
+});
+
+const upload = multer({ storage: storage });
 
 const IPD = express();
 
 IPD.get("/", async (req, res) => {
-  // get all IPD informations
   let IPDs = [];
   try {
     IPDs = await allIPD();
   } catch (e) {
     console.log(e);
-    IPDs = []
+    IPDs = [];
   }
   res.send(IPDs);
 });
 
 IPD.get("/:id", async (req, res) => {
-  // get IPD information with working information
   const id = req.params.id;
   let information = {};
   try {
@@ -27,11 +43,11 @@ IPD.get("/:id", async (req, res) => {
   res.send(information);
 });
 
-IPD.post("/:id", async (req, res) => {
-  // add IPD information
+IPD.post("/:id", upload.single("file"), async (req, res) => {
   const IPD = {
     IPDid: req.params.id,
     ...req.body,
+    prescription_path: req.file.path,
   };
   let newIPD = {};
   try {
@@ -39,11 +55,11 @@ IPD.post("/:id", async (req, res) => {
   } catch (e) {
     newIPD = {};
   }
+
   res.send(newIPD);
 });
 
 IPD.put("/:id", async (req, res) => {
-  // update IPD information
   const IPD = {
     IPDid: req.params.id,
     ...req.body,
@@ -58,7 +74,6 @@ IPD.put("/:id", async (req, res) => {
 });
 
 IPD.delete("/:id", async (req, res) => {
-  // delete IPD information
   const id = req.params.id;
   let deletedIPD = {};
   try {

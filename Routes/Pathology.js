@@ -8,26 +8,43 @@ import {
   updatePathology,
 } from "../DB/Pathology.js";
 
+import dotenv from "dotenv";
+import multer from "multer";
+import path from "node:path";
+
+dotenv.config();
+
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, `${process.env.HOSPITALFILES}`);
+  },
+  filename: (req, file, cb) => {
+    const uniqueSuffix = Date.now() + "-" + Math.round(Math.random() * 1e9);
+    const onlyName = file.originalname.split(".")[0];
+    cb(null, `${onlyName}-${uniqueSuffix}${path.extname(file.originalname)}`);
+  },
+});
+
+const upload = multer({ storage: storage });
+
 const Pathology = express();
 
 Pathology.get("/", async (req, res) => {
-  // get all Pathology informations
   const Pathologys = await allPathology();
   res.send(Pathologys);
 });
 
 Pathology.get("/:id", async (req, res) => {
-  // get Pathology information with working information
   const id = req.params.id;
   const information = await queryPathology(id);
   res.send(information);
 });
 
-Pathology.post("/:id", async (req, res) => {
-  // add Pathology information
+Pathology.post("/:id", upload.single("file"), async (req, res) => {
   const Pathology = {
     Pathologyid: req.params.id,
     ...req.body,
+    result_path: req.file.path,
   };
   const newPathology = await addPathology(Pathology);
   res.send(newPathology);

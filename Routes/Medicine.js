@@ -8,27 +8,45 @@ import {
   updateMedicine,
 } from "../DB/Medicine.js";
 
+import dotenv from "dotenv";
+import multer from "multer";
+import path from "node:path";
+
+dotenv.config();
+
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, `${process.env.HOSPITALFILES}`);
+  },
+  filename: (req, file, cb) => {
+    const uniqueSuffix = Date.now() + "-" + Math.round(Math.random() * 1e9);
+    const onlyName = file.originalname.split(".")[0];
+    cb(null, `${onlyName}-${uniqueSuffix}${path.extname(file.originalname)}`);
+  },
+});
+
+const upload = multer({ storage: storage });
+
 const Medicine = express();
 
 Medicine.get("/", async (req, res) => {
-  // get all Medicine informations
   const Medicines = await allMedicine();
   res.send(Medicines);
 });
 
 Medicine.get("/:id", async (req, res) => {
-  // get Medicine information with working information
   const id = req.params.id;
   const information = await queryMedicine(id);
   res.send(information);
 });
 
-Medicine.post("/:id", async (req, res) => {
-  // add Medicine information
+Medicine.post("/:id", upload.single("file"), async (req, res) => {
   const Medicine = {
     Medicineid: req.params.id,
     ...req.body,
+    medicine_path: req.file.path,
   };
+
   const newMedicine = await addMedicine(Medicine);
   res.send(newMedicine);
 });
