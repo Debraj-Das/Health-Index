@@ -5,7 +5,7 @@ create table shop(
 );
 
 insert into shop(shopid, location) 
-values ('TXT2356', 'contai, purba Medinipur'),
-('TXT2357', 'digha, purba Medinipur'),
-('TXT2358', 'kharagpur, paschim Medinipur'),
-('TXT2359', 'kolkata, kolkata');
+values ('shop1', 'contai, purba Medinipur'),
+('shop2', 'digha, purba Medinipur'),
+('shop3', 'kharagpur, paschim Medinipur'),
+('shop4', 'kolkata, kolkata');

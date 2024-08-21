@@ -7,6 +7,6 @@ create table medicine(
    medicine_path text
 );
 
-insert into medicine(userid, date, doctor, medicine) values
-('TXT1240', '2019-01-01', 'Dr. A', 'Medicine A'), 
-('TXT1240', '2019-01-02', 'Dr. B', 'Medicine B');
+-- insert into medicine(userid, date, doctor, medicine) values
+-- ('TXT1240', '2019-01-01', 'Dr. A', 'Medicine A'), 
+-- ('TXT1240', '2019-01-02', 'Dr. B', 'Medicine B');

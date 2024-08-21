@@ -5,6 +5,7 @@ import {
   allUser,
   updateUser,
   userInf,
+  userMedical,
   userWorking,
 } from "../DB/HR.js";
 
@@ -25,7 +26,8 @@ hr.get("/:id", async (req, res) => {
   const id = req.params.id;
   const information = await userInf(id);
   const working = await userWorking(id);
-  res.send({ information, working });
+  const medical = await userMedical(id);
+  res.send({ information, working, medical });
 });
 
 hr.put("/:id", (req, res) => {

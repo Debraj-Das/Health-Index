@@ -11,5 +11,5 @@ create table hr_static (
 );
 
 insert into hr_static (userid, name, dob, gender, phone, email, joining_date, leaving_date) values
-('TXT1240', 'John Doe', '1980-01-01', 'male', '1234567890', 'john@gmail.com', '2010-01-01', null),
-('TXT1245', 'Debraj Das', '1985-01-10', 'male', '1234567891', 'debraj@gmai.com', '2010-01-01', '2015-01-01');
+('TML202453', 'John Doe', '1980-01-01', 'male', '1234567890', 'john@gmail.com', '2010-01-01', null),
+('TML202454', 'Debraj Das', '1985-01-10', 'male', '1234567891', 'debraj@gmai.com', '2010-01-01', '2015-01-01');
