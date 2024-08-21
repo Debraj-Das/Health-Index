@@ -2,7 +2,6 @@ import db from "./HealthIndexDB.js";
 
 async function allShop() {
   const result = await db.query("select * from shop;");
-  console.log(result.rows)
   return result.rows;
 }
 
@@ -14,8 +13,6 @@ async function ShopInf(shopid) {
 }
 
 async function addShop(shop) {
-
-  console.log(shop)
   const { shopid, location } = shop;
   let result
   try {

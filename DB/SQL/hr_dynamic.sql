@@ -4,7 +4,7 @@ create table hr_dynamic (
    shopid text not null,
    shift text,
    grade text,
-   joining_shop date
+   joining_date date
 );
 
 insert into hr_dynamic (userid, shopid, shift, grade, joining_shop) values
