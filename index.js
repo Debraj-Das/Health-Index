@@ -57,3 +57,12 @@ app.use("/api/medicine", Medicine);
 
 import Pathology from "./Routes/Pathology.js";
 app.use("/api/pathology", Pathology);
+
+/*
+  Human Resource Analytics API
+  1. api/Analytics
+
+*/
+
+import Analytics from "./Routes/Analytics.js";
+app.use("/api/Analytics", Analytics);
