@@ -16,7 +16,7 @@ dotenv.config();
 
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    cb(null, `${process.env.HOSPITALFILES}`);
+    cb(null, `${process.env.HOSPITAL_FILES}`);
   },
   filename: (req, file, cb) => {
     const uniqueSuffix = Date.now() + "-" + Math.round(Math.random() * 1e9);
