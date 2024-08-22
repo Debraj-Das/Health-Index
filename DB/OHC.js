@@ -13,6 +13,10 @@ async function queryOHC(id) {
 async function addOHC(ohc) {
   const { userid, date, doctor, prescription, prescription_path } = ohc;
 
+  if (date == "") {
+    date = null;
+  }
+
   const result = await db.query(
     "insert into ohc (userid, date, doctor, prescription, prescription_path) values ($1, $2, $3, $4, $5) returning *;",
     [userid, date, doctor, prescription, prescription_path]

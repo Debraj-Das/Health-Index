@@ -29,6 +29,7 @@ async function addUser(user) {
     shift,
     grade,
   } = user;
+
   if (dob == "") {
     dob = null;
   }
@@ -38,6 +39,7 @@ async function addUser(user) {
 
   let result = {},
     shopDetails = {};
+
   try {
     result = await db.query(
       "insert into hr_static (userid, name, dob, gender, phone, email, joining_date) values ($1, $2, $3, $4, $5, $6, $7) returning *;",
