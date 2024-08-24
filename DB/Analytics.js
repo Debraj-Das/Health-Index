@@ -1,32 +1,35 @@
 import db from "./HealthIndexDB.js";
 
-// async function userInf(id) {
-//   const result = await db.query("select * from hr_static where userid=$1;", [
-//     id,
-//   ]);
-//   if (result.rowCount == 0) {
-//     return {};
-//   }
-//   return result.rows[0];
-// }
+async function userInf(id) {
+  const result = await db.query("select * from hr_static where userid=$1;", [
+    id,
+  ]);
+  if (result.rowCount == 0) {
+    return {};
+  }
+  return result.rows[0];
+}
 
 async function userWorking(userid, starting_date, ending_date) {
   const result = await db.query(
     "select * from hr_dynamic where userid=$1 and joining_date>=$2 and joining_date<=$3 ORDER BY joining_date DESC;",
     [userid, starting_date, ending_date]
   );
+
+  
+
   return result.rows;
 }
 
-// async function shopInf(shodid) {
-//   const result = await db.query("select * from shop where shopid=$1;", [
-//     shodid,
-//   ]);
-//   if (result.rowCount == 0) {
-//     return {};
-//   }
-//   return result.rows[0];
-// }
+async function shopInf(shodid) {
+  const result = await db.query("select * from shop where shopid=$1;", [
+    shodid,
+  ]);
+  if (result.rowCount == 0) {
+    return {};
+  }
+  return result.rows[0];
+}
 
 async function shopEnv(id, starting_date, ending_date) {
   const result = await db.query(
@@ -71,4 +74,4 @@ async function medical(userid, starting_date, ending_date) {
   };
 }
 
-export { medical, shopEnv, userWorking };
+export { medical, shopEnv, shopInf, userInf, userWorking };

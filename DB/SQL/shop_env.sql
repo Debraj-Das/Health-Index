@@ -2,12 +2,12 @@ create table shop_env(
    id serial primary key,
    shopid text not null,
    date date,
-   temparature float,
+   temperature float,
    co2_label float,
    humidity float
 );
 
-insert into shop_env(shopid, date, temparature, co2_label, humidity)
+insert into shop_env(shopid, date, temperature, co2_label, humidity)
 values ('shop1', '2024-01-01', 25.0, 0.5, 0.6),
 ('shop1', '2024-01-02', 25.5, 0.6, 0.7),
 ('shop1', '2024-01-03', 26.0, 0.7, 0.8),

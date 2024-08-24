@@ -14,20 +14,22 @@ async function ShopInf(shopid) {
 
 async function addShop(shop) {
   const { shopid, location } = shop;
-  let result
+  let result;
   try {
-  result = await db.query(
-    "insert into shop (shopid, location) values ($1, $2) returning *;",
-    [shopid, location]
-  );
-} catch (err){
-  console.log(err)
-  result = {
-    rows: [{
-      "message": "shopid already exist"
-    }]
+    result = await db.query(
+      "insert into shop (shopid, location) values ($1, $2) returning *;",
+      [shopid, location]
+    );
+  } catch (err) {
+    console.log(err);
+    result = {
+      rows: [
+        {
+          message: "shopid already exist",
+        },
+      ],
+    };
   }
-}
   return result.rows[0];
 }
 
@@ -61,10 +63,10 @@ async function ShopEnviroment(shopid) {
 }
 
 async function addShopEnviroment(shopEnv) {
-  const { shopid, date, temparature, co2_label, humidity } = shopEnv;
+  const { shopid, date, temperature, co2_label, humidity } = shopEnv;
   const result = await db.query(
-    "insert into shop_env (shopid, date, temparature, co2_label, humidity) values ($1, $2, $3, $4, $5) returning *;",
-    [shopid, date, temparature, co2_label, humidity]
+    "insert into shop_env (shopid, date, temperature, co2_label, humidity) values ($1, $2, $3, $4, $5) returning *;",
+    [shopid, date, temperature, co2_label, humidity]
   );
   return result.rows[0];
 }
