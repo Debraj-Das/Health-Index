@@ -21,7 +21,6 @@ async function userWorking(userid, starting_date, ending_date) {
     "select * from hr_dynamic where userid=$1 and joining_date<$2 ORDER BY joining_date DESC;",
     [userid, starting_date]
   );
-  console.log(result2.rows[0]);
 
   let answer = [];
   if (result.rowCount > 0) {
@@ -31,8 +30,6 @@ async function userWorking(userid, starting_date, ending_date) {
   if (result2.rowCount > 0) {
     answer.push(result2.rows[0]);
   }
-
-  console.log(answer);
 
   return answer;
 }
@@ -52,7 +49,7 @@ async function shopEnv(id, starting_date, ending_date) {
     "select * from shop_env where shopid=$1 and date>=$2 and date<=$3 ORDER BY date DESC;",
     [id, starting_date, ending_date]
   );
-  
+
   return result.rows;
 }
 
