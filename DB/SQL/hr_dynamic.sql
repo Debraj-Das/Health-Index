@@ -9,5 +9,5 @@ create table hr_dynamic (
 );
 
 insert into hr_dynamic (userid, shopid,distance, shift, grade, joining_date) values
-('TXT1240', 'TXT2356','5-10km', 'morning: 10am-6pm', 'A', '2010-01-01'),
-('TXT1245', 'TXT2357','0-5km', 'night: 6pm - 12am', 'B', '2010-01-01');
+('TXT1240', 'shop1','5-10km', 'morning: 10am-6pm', 'A', '2010-01-01'),
+('TXT1245', 'shop1','0-5km', 'night: 6pm - 12am', 'B', '2010-01-01');

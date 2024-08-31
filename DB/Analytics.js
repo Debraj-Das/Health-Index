@@ -16,9 +16,25 @@ async function userWorking(userid, starting_date, ending_date) {
     [userid, starting_date, ending_date]
   );
 
-  
+  // previous last working experience
+  const result2 = await db.query(
+    "select * from hr_dynamic where userid=$1 and joining_date<$2 ORDER BY joining_date DESC;",
+    [userid, starting_date]
+  );
+  console.log(result2.rows[0]);
 
-  return result.rows;
+  let answer = [];
+  if (result.rowCount > 0) {
+    answer = result.rowCount;
+  }
+
+  if (result2.rowCount > 0) {
+    answer.push(result2.rows[0]);
+  }
+
+  console.log(answer);
+
+  return answer;
 }
 
 async function shopInf(shodid) {
