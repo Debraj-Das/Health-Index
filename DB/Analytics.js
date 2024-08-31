@@ -52,6 +52,7 @@ async function shopEnv(id, starting_date, ending_date) {
     "select * from shop_env where shopid=$1 and date>=$2 and date<=$3 ORDER BY date DESC;",
     [id, starting_date, ending_date]
   );
+  
   return result.rows;
 }
 

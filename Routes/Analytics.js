@@ -22,7 +22,10 @@ router.get("/", async (req, res) => {
   let ending = ending_date;
   for (let i = 0; i < userWork.length; i++) {
     const shopid = userWork[i].shopid;
-    const starting = userWork[i].joining_date;
+    let starting = userWork[i].joining_date;
+
+    starting = starting > starting_date ? starting : starting_date;
+
     const currentShopEnv = await shopEnv(shopid, starting, ending);
 
     ending = starting;
