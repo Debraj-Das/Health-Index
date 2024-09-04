@@ -28,6 +28,8 @@ async function addUser(user) {
     joining_date,
     shift,
     grade,
+    allergy,
+    medicine_resistant,
   } = user;
 
   if (dob == "") {
@@ -42,8 +44,17 @@ async function addUser(user) {
 
   try {
     result = await db.query(
-      "insert into hr_static (userid, name, dob, gender, phone, email, joining_date) values ($1, $2, $3, $4, $5, $6, $7) returning *;",
-      [userid, name, dob, gender, phone, email, joining_date]
+      "insert into hr_static (userid, name, dob, gender, phone, email, joining_date, allergy, medicine_resistant) values ($1, $2, $3, $4, $5, $6, $7, $8, $9) returning *;",
+      [
+        userid,
+        name,
+        dob,
+        gender,
+        phone,
+        email,
+        joining_date.allergy,
+        medicine_resistant,
+      ]
     );
     shopDetails = await db.query(
       "insert into hr_dynamic (userid, shopid,distance, shift, grade, joining_date) values ($1, $2, $3, $4, $5, $6) returning *;",
