@@ -30,6 +30,7 @@ async function addUser(user) {
     grade,
     allergy,
     medicine_resistant,
+    blood_group,
   } = user;
 
   if (dob == "") {
@@ -44,7 +45,7 @@ async function addUser(user) {
 
   try {
     result = await db.query(
-      "insert into hr_static (userid, name, dob, gender, phone, email, joining_date, allergy, medicine_resistant) values ($1, $2, $3, $4, $5, $6, $7, $8, $9) returning *;",
+      "insert into hr_static (userid, name, dob, gender, phone, email, joining_date, allergy, medicine_resistant,blood_group) values ($1, $2, $3, $4, $5, $6, $7, $8, $9,$10) returning *;",
       [
         userid,
         name,
@@ -52,8 +53,10 @@ async function addUser(user) {
         gender,
         phone,
         email,
-        joining_date.allergy,
+        joining_date,
+        allergy,
         medicine_resistant,
+        blood_group,
       ]
     );
     shopDetails = await db.query(

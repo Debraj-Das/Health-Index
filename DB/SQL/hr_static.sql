@@ -9,7 +9,8 @@ create table hr_static (
    joining_date date,
    leaving_date date,
    allergy text,
-   medicine_resistant text
+   medicine_resistant text,
+   blood_group text
 );
 
 insert into hr_static (userid, name, dob, gender, phone, email, joining_date, leaving_date) values
