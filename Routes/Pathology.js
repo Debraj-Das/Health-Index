@@ -11,6 +11,7 @@ import {
 import dotenv from "dotenv";
 import multer from "multer";
 import path from "node:path";
+import sendMail from "../Mail/sendmails.js";
 
 dotenv.config();
 
@@ -40,12 +41,32 @@ Pathology.get("/:id", async (req, res) => {
   res.send(information);
 });
 
+async function verification(test, result) {
+  if (
+    (test === "pressure" && result?.substring(0, 4) === "High") ||
+    (test === "sugar" && result?.substring(0, 4) === "High")
+  ) {
+    const info = await sendMail(
+      "debrajdas.rautara@gmail.com", // sender mail
+      "Health Index Alert",
+      "Your Health Index is not good. Please contact with your doctor."
+    );
+    console.log(info);
+  }
+}
+
 Pathology.post("/:id", upload.single("file"), async (req, res) => {
   const Pathology = {
     Pathologyid: req.params.id,
     ...req.body,
-    result_path: req.file.path,
+    result_path: req?.file?.path,
   };
+
+  console.log(Pathology);
+
+  const { test, result } = Pathology;
+  await verification(test, result);
+
   const newPathology = await addPathology(Pathology);
   res.send(newPathology);
 });
