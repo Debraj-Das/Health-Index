@@ -66,3 +66,11 @@ app.use("/api/pathology", Pathology);
 
 import Analytics from "./Routes/Analytics.js";
 app.use("/api/Analytics", Analytics);
+
+import sendMail from "./Mail/sendmails.js";
+
+app.post("/api/sendmail", async (req, res) => {
+  const { to, subject, message } = req.body;
+  const result = await sendMail(to, subject, message);
+  res.send(result);
+});
